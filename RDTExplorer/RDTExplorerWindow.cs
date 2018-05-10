@@ -7,7 +7,6 @@
     using Microsoft.VisualStudio;
     using Microsoft.VisualStudio.Shell.Interop;
     using EnvDTE;
-    using EnvDTE80;
 
     [Guid("56d53fc7-b012-4a74-866d-7a273bf7de5f")]
     public class RDTExplorerWindow : ToolWindowPane, IVsRunningDocTableEvents
@@ -36,9 +35,33 @@
         public int OnAfterSave(uint docCookie)
         {
             IVsRunningDocumentTable rdt = (IVsRunningDocumentTable) this.GetService(typeof(SVsRunningDocumentTable));
+            // Retrieve document info
+            uint pgrfRDTFlags;
+            uint pdwReadLocks;
+            uint pdwEditLocks;
+            string pbstrMkDocument;
+            IVsHierarchy ppHier;
+            uint pitemid;
+            IntPtr ppunkDocData;
+            rdt.GetDocumentInfo(
+                docCookie, out pgrfRDTFlags, out pdwReadLocks, out pdwEditLocks,
+                out pbstrMkDocument, out ppHier, out pitemid, out ppunkDocData);
+
+            // Get automation-object Document and work with it
+            EnvDTE.DTE dte = (DTE)this.GetService(typeof(DTE));
+            ProjectItem prjItem = dte.Solution.FindProjectItem(pbstrMkDocument);
+            //ProjectItem prjItem = FindSolutionItemByName(dte, pbstrMkDocument,true);
+            if (prjItem != null)
+                OnDocumentSaved(prjItem.Document);
 
             ((RDTExplorerWindowControl)this.Content).listBox.Items.Add("Entering OnAfterSave");
+
             return VSConstants.S_OK;  
+        }
+
+        private void OnDocumentSaved(Document document)
+        {
+            throw new NotImplementedException();
         }
 
         public int OnAfterAttributeChange(uint docCookie, uint grfAttribs)
@@ -73,6 +96,43 @@
             rdt.UnadviseRunningDocTableEvents(rdtCookie);
 
             base.Dispose(disposing);
+        }
+
+        public static ProjectItem FindSolutionItemByName(DTE dte, string name, bool recursive)
+        {
+            ProjectItem projectItem = null;
+            foreach (Project project in dte.Solution.Projects)
+            {
+                projectItem = FindProjectItemInProject(project, name, recursive);
+
+                if (projectItem != null)
+                {
+                    break;
+                }
+            }
+            return projectItem;
+        }
+
+        public static ProjectItem FindProjectItemInProject(Project project, string name, bool recursive)
+        {
+            ProjectItem projectItem = null;
+            // if solution folder, one of its ProjectItems might be a real project
+            foreach (ProjectItem item in project.ProjectItems)
+            {
+                Project realProject = item.Object as Project;
+
+                if (realProject != null)
+                {
+                    projectItem = FindProjectItemInProject(realProject, name, recursive);
+
+                    if (projectItem != null)
+                    {
+                        break;
+                    }
+                }
+            }
+
+            return projectItem;
         }
 
     }
