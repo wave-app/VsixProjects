@@ -15,7 +15,6 @@ on the official Visual Studio extension gallery.
 ## 1.1
 
 - [x] Feature 3
-- [x] Feature 4
 
 ## 1.0
 
