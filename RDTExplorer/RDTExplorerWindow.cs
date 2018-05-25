@@ -52,16 +52,14 @@
             ProjectItem prjItem = dte.Solution.FindProjectItem(pbstrMkDocument);
             //ProjectItem prjItem = FindSolutionItemByName(dte, pbstrMkDocument,true);
             if (prjItem != null)
-                OnDocumentSaved(prjItem.Document);
-
-            ((RDTExplorerWindowControl)this.Content).listBox.Items.Add("Entering OnAfterSave");
+                OnDocumentSaved(prjItem.Document);          
 
             return VSConstants.S_OK;  
         }
 
         private void OnDocumentSaved(Document document)
         {
-            throw new NotImplementedException();
+             ((RDTExplorerWindowControl)this.Content).listBox.Items.Add(document.FullName);
         }
 
         public int OnAfterAttributeChange(uint docCookie, uint grfAttribs)

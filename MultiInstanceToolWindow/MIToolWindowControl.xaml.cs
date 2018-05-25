@@ -1,20 +1,18 @@
-﻿namespace RDTExplorer
+﻿namespace MultiInstanceToolWindow
 {
-    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Navigation;
 
     /// <summary>
-    /// Interaction logic for RDTExplorerWindowControl.
+    /// Interaction logic for MIToolWindowControl.
     /// </summary>
-    public partial class RDTExplorerWindowControl : UserControl
+    public partial class MIToolWindowControl : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="RDTExplorerWindowControl"/> class.
+        /// Initializes a new instance of the <see cref="MIToolWindowControl"/> class.
         /// </summary>
-        public RDTExplorerWindowControl()
+        public MIToolWindowControl()
         {
             this.InitializeComponent();
         }
@@ -30,13 +28,7 @@
         {
             MessageBox.Show(
                 string.Format(System.Globalization.CultureInfo.CurrentUICulture, "Invoked '{0}'", this.ToString()),
-                "RDTExplorerWindow");
-        }
-
-        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
-        {                        
-            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
-            e.Handled = true;
+                "MIToolWindow");
         }
     }
 }

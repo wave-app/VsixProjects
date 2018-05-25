@@ -4,15 +4,39 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vsshell="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.15.0"
-             Background="{DynamicResource {x:Static vsshell:VsBrushes.WindowKey}}"
-             Foreground="{DynamicResource {x:Static vsshell:VsBrushes.WindowTextKey}}"
+             xmlns:local="clr-namespace:RDTExplorer"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              Name="MyToolWindow">
+
+    <UserControl.Resources>
+        <local:HyperlinkDataTemplateSelector x:Key="itemTemplateSelector">
+            <local:HyperlinkDataTemplateSelector.HyperlinkTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                         <Hyperlink NavigateUri="{Binding}" RequestNavigate="Hyperlink_RequestNavigate">>
+                           <TextBlock Text="{Binding}" />
+                        </Hyperlink>      
+                    </TextBlock>
+                    </DataTemplate>
+                </local:HyperlinkDataTemplateSelector.HyperlinkTemplate>
+        </local:HyperlinkDataTemplateSelector>
+    </UserControl.Resources>
     <Grid>
         <StackPanel Orientation="Vertical" Margin="-10,10,10,0">
             <TextBlock Margin="10" HorizontalAlignment="Center">RDTExplorerWindow</TextBlock>
-            <ListBox x:Name="listBox" Height="100" />
-        </StackPanel>
+            <!--<ListBox x:Name="listBox" Height="100" ItemsSource="{Binding Path=FilesChanged, Mode=OneWay}" >
+                <ListBox.Resources>
+                    <DataTemplate DataType="String">
+                        <TextBlock>
+                            <Hyperlink NavigateUri="{Binding}" RequestNavigate="Hyperlink_RequestNavigate">
+                                <TextBlock Text="{Binding}" />
+                            </Hyperlink>
+                        </TextBlock>
+                    </DataTemplate>
+                </ListBox.Resources>
+            </ListBox>-->
+            <ListBox  x:Name="listBox" ItemTemplateSelector="{StaticResource itemTemplateSelector}"/>
+        </StackPanel>        
     </Grid>
 </UserControl>

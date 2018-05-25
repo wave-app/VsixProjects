@@ -20,11 +20,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectTypeGuids>{82b43b9b-a64c-4715-b499-d71e9ca2bd60};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <ProjectGuid>{DE73EEF0-E7D6-4784-BC57-C1D7A309D937}</ProjectGuid>
+    <ProjectGuid>{0C75CA72-677E-4481-B4F4-BC27A7625367}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RDTExplorer</RootNamespace>
-    <AssemblyName>RDTExplorer</AssemblyName>
+    <RootNamespace>FirstToolWin</RootNamespace>
+    <AssemblyName>FirstToolWin</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <GeneratePkgDefFile>true</GeneratePkgDefFile>
     <IncludeAssemblyInVSIXContainer>true</IncludeAssemblyInVSIXContainer>
@@ -54,14 +54,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="HyperlinkDataTemplateSelector.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RDTExplorerWindow.cs" />
-    <Compile Include="RDTExplorerWindowCommand.cs" />
-    <Compile Include="RDTExplorerWindowControl.xaml.cs">
-      <DependentUpon>RDTExplorerWindowControl.xaml</DependentUpon>
+    <Compile Include="FirstToolWindow.cs" />
+    <Compile Include="FirstToolWindowCommand.cs" />
+    <Compile Include="FirstToolWindowControl.xaml.cs">
+      <DependentUpon>FirstToolWindowControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RDTExplorerWindowPackage.cs" />
+    <Compile Include="FirstToolWindowPackage.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -72,7 +71,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="RDTExplorerWindowControl.xaml">
+    <Page Include="FirstToolWindowControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -174,11 +173,11 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <VSCTCompile Include="RDTExplorerWindowPackage.vsct">
+    <VSCTCompile Include="FirstToolWindowPackage.vsct">
       <ResourceName>Menus.ctmenu</ResourceName>
     </VSCTCompile>
-    <Content Include="Resources\RDTExplorerWindowCommand.png" />
-    <Content Include="Resources\RDTExplorerWindowPackage.ico" />
+    <Content Include="Resources\FirstToolWindowCommand.png" />
+    <Content Include="Resources\FirstToolWindowPackage.ico" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="VSPackage.resx">
