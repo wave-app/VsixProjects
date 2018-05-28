@@ -22,20 +22,17 @@
 
         public int OnAfterFirstDocumentLock(uint docCookie, uint dwRDTLockType, uint dwReadLocksRemaining, uint dwEditLocksRemaining)
         {
-            //((RDTExplorerWindowControl)this.Content).listBox.Items.Add("Entering OnAfterFirstDocumentLock");  
     return VSConstants.S_OK;  
         }
 
         public int OnBeforeLastDocumentUnlock(uint docCookie, uint dwRDTLockType, uint dwReadLocksRemaining, uint dwEditLocksRemaining)
         {
-            //((RDTExplorerWindowControl)this.Content).listBox.Items.Add("Entering OnBeforeLastDocumentUnlock");
             return VSConstants.S_OK;
         }
 
         public int OnAfterSave(uint docCookie)
         {
             IVsRunningDocumentTable rdt = (IVsRunningDocumentTable) this.GetService(typeof(SVsRunningDocumentTable));
-            // Retrieve document info
             uint pgrfRDTFlags;
             uint pdwReadLocks;
             uint pdwEditLocks;
@@ -47,10 +44,8 @@
                 docCookie, out pgrfRDTFlags, out pdwReadLocks, out pdwEditLocks,
                 out pbstrMkDocument, out ppHier, out pitemid, out ppunkDocData);
 
-            // Get automation-object Document and work with it
             EnvDTE.DTE dte = (DTE)this.GetService(typeof(DTE));
             ProjectItem prjItem = dte.Solution.FindProjectItem(pbstrMkDocument);
-            //ProjectItem prjItem = FindSolutionItemByName(dte, pbstrMkDocument,true);
             if (prjItem != null)
                 OnDocumentSaved(prjItem.Document);          
 
@@ -64,19 +59,16 @@
 
         public int OnAfterAttributeChange(uint docCookie, uint grfAttribs)
         {
-            //((RDTExplorerWindowControl)this.Content).listBox.Items.Add("Entering OnAfterAttributeChange");
             return VSConstants.S_OK;  
         }
 
         public int OnBeforeDocumentWindowShow(uint docCookie, int fFirstShow, IVsWindowFrame pFrame)
         {
-            //((RDTExplorerWindowControl)this.Content).listBox.Items.Add("Entering OnBeforeDocumentWindowShow");
             return VSConstants.S_OK;  
         }
 
         public int OnAfterDocumentWindowHide(uint docCookie, IVsWindowFrame pFrame)
         {
-            //((RDTExplorerWindowControl)this.Content).listBox.Items.Add("Entering OnAfterDocumentWindowHide");
             return VSConstants.S_OK;  
         }
 
@@ -89,7 +81,6 @@
 
         protected override void Dispose(bool disposing)
         {
-            // Release the RDT cookie.  
             IVsRunningDocumentTable rdt = (IVsRunningDocumentTable) ServiceProvider.GetGlobalServiceAsync(typeof(SVsRunningDocumentTable));
             rdt.UnadviseRunningDocTableEvents(rdtCookie);
 
@@ -114,7 +105,6 @@
         public static ProjectItem FindProjectItemInProject(Project project, string name, bool recursive)
         {
             ProjectItem projectItem = null;
-            // if solution folder, one of its ProjectItems might be a real project
             foreach (ProjectItem item in project.ProjectItems)
             {
                 Project realProject = item.Object as Project;
