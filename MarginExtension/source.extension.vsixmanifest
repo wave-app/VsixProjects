@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="DTEProject.fc4922a9-de89-49d1-b70b-bbb54958c9cf" Version="1.0" Language="en-US" Publisher="ffcardim" />
-    <DisplayName>DTEProject</DisplayName>
+    <Identity Id="MarginExtension.421c0446-b615-4185-b54f-2bea0a0bdb92" Version="1.0" Language="en-US" Publisher="ffcardim" />
+    <DisplayName>MarginExtension</DisplayName>
     <Description>Empty VSIX Project.</Description>
   </Metadata>
   <Installation>

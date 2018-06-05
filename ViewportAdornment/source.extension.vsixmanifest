@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="DTEProject.fc4922a9-de89-49d1-b70b-bbb54958c9cf" Version="1.0" Language="en-US" Publisher="ffcardim" />
-    <DisplayName>DTEProject</DisplayName>
+    <Identity Id="ViewportAdornment.9a183377-facd-4ba4-85e8-bf28d28f30d4" Version="1.0" Language="en-US" Publisher="ffcardim" />
+    <DisplayName>ViewportAdornment</DisplayName>
     <Description>Empty VSIX Project.</Description>
   </Metadata>
   <Installation>
